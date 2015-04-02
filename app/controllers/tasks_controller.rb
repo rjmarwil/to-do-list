@@ -30,11 +30,12 @@ class TasksController < ApplicationController
     render json: Task.all.order(:placement)
   end
 
-  def delete
+  def destroy
     Task.find(params[:id]).destroy
     Task.all.order(:placement).each_with_index do |task, index|
       task.update(placement: index)
     end
+    redirect_to root_path
   end
 
   private
