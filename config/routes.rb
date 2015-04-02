@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  get 'tasks/index'
+  root "tasks#index"
 
-  get 'tasks/create'
-
-  get 'tasks/update'
-
-  get 'tasks/delete'
+  resources :tasks
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  root 'todo#index'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
