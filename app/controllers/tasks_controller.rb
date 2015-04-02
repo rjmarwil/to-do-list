@@ -1,14 +1,11 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(:placement)
     @task = Task.new
   end
 
   def create
     @task = Task.new(task_params)
-    Task.all.each_with_index do |task, index|
-      task.update(placement: index)
-    end
 
     @task.update(placement: Task.count)
 
@@ -20,11 +17,24 @@ class TasksController < ApplicationController
   end
 
   def update
+
+  end
+
+  def swap
+    @task = Task.find(params[:id])
+
+    if params[:direction]
+      Task.swap(@task, params[:direction].to_i)
+    end
+
+    render json: Task.all.order(:placement)
   end
 
   def delete
-    @task = Task.find(params[:id])
-    @task.destroy
+    Task.find(params[:id]).destroy
+    Task.all.order(:placement).each_with_index do |task, index|
+      task.update(placement: index)
+    end
   end
 
   private
