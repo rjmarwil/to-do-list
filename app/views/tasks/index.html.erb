@@ -17,15 +17,14 @@
 <% end %>
 
 <div class="col-md-8">
-  <div class="panel panel-info">
-    <ol>
-      <% @tasks.each do |task| %>
-      <li>
-        <%= task.description %>
-        <%= link_to '', swap_task_path(task, direction: -1), method: :patch, class: "glyphicon glyphicon-chevron-up"  %>
-        <%= link_to '', swap_task_path(task, direction: 1), method: :patch, class: "glyphicon glyphicon-chevron-down" %>
-      </li>
-      <% end %>
-    </ol>
-  </div>
+  <ol>
+    <% @tasks.each do |task| %>
+    <li>
+      <%= task.description %>
+      <%= link_to '', swap_task_path(task, direction: -1), method: :patch, class: "glyphicon glyphicon-chevron-up"  %>
+      <%= link_to '', swap_task_path(task, direction: 1), method: :patch, class: "glyphicon glyphicon-chevron-down" %>
+      <%= link_to '', task_path(task), method: :delete, class:'glyphicon glyphicon-trash' %>
+    </li>
+    <% end %>
+  </ol>  
 </div>
