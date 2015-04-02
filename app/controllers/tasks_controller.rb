@@ -27,7 +27,8 @@ class TasksController < ApplicationController
       Task.swap(@task, params[:direction].to_i)
     end
 
-    render json: Task.all.order(:placement)
+    # render json: Task.all.order(:placement)
+    redirect_to root_path
   end
 
   def destroy
