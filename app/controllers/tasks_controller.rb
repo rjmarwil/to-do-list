@@ -6,6 +6,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    Task.all.each_with_index do |task, index|
+      task.update(placement: index)
+    end
+
+    @task.update(placement: Task.count)
 
     if @task.save
       render json: @task
