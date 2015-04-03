@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   validates :description, presence: true
 
+  # swap function
   def self.swap(task, direction)
     return if task.placement == 0 || task.placement == Task.count - 1
 
